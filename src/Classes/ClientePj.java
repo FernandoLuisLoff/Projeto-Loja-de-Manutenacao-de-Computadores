@@ -50,7 +50,7 @@ public class ClientePj extends Cliente {
         String []nome = new String[] {"Americanas", "Casas Bahia", "Mercado Livre"};
         String []cnpj = new String[] {"123465478", "46749847", "4568978"};
 
-        for (int i=0; i<3; i++){
+        for (int i=0; i<nome.length; i++){
             addClientePj(new ClientePj(nome[i], cnpj[i]));
             setQtdCllientesPj(getQtdCllientesPj()+1);
         }

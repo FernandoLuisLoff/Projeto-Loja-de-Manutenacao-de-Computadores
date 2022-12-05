@@ -45,10 +45,10 @@ public class App {
         boolean validacao=true;
 
         // Carregando dados nas arreys
-        // pessoaFisica.inicializaClientesPF();
-        // pessoaJuridica.inicializaClientesPJ(); 
-        // produto.inicializaProdutos();
-        // servico.inicializaServicos();
+        pessoaFisica.inicializaClientesPF();
+        pessoaJuridica.inicializaClientesPJ(); 
+        produto.inicializaProdutos();
+        servico.inicializaServicos();
 
         do {
             JOptionPane.showMessageDialog(null,
@@ -146,6 +146,7 @@ public class App {
                             "Qual o nome do produto:",
                             "Cadastro Produto",
                             JOptionPane.DEFAULT_OPTION));
+
                         if (produto.getNome().isEmpty()) {
                             JOptionPane.showMessageDialog(null,
                                 "Campo nome nao foi preenchido!",
@@ -158,7 +159,16 @@ public class App {
                                     "Cadastro Produto",
                                     JOptionPane.DEFAULT_OPTION)));
 
-                                validacao=true;
+                                if (produto.getValor()<=0){
+                                    JOptionPane.showMessageDialog(null,
+                                        "O valor deve ser maior que 0!",
+                                        "Cadastro Produto",
+                                        JOptionPane.ERROR_MESSAGE); 
+
+                                    validacao=false;
+                                } else {
+                                    validacao=true;
+                                }
                             } catch (Exception e) {
                                 JOptionPane.showMessageDialog(null,
                                     "Valor invalido!",
@@ -174,9 +184,16 @@ public class App {
                                         "Cadastro Produto",
                                         JOptionPane.DEFAULT_OPTION)));
 
-                                    produto.addProduto(new Produto(produto.getNome(), produto.getValor(), produto.getGarantia())); 
-                                    produto.setQtdprodutos(produto.getQtdprodutos()+1);
-                                } catch (Exception e) {
+                                    if (produto.getGarantia()<=0){
+                                        JOptionPane.showMessageDialog(null,
+                                            "A garantia deve ser maior que 0!",
+                                            "Cadastro Produto",
+                                            JOptionPane.ERROR_MESSAGE); 
+                                    } else {
+                                        produto.addProduto(new Produto(produto.getNome(), produto.getValor(), produto.getGarantia())); 
+                                        produto.setQtdprodutos(produto.getQtdprodutos()+1);
+                                    }
+                                } catch (Exception e){
                                     JOptionPane.showMessageDialog(null,
                                         "Garantia invalida!",
                                         "Cadastro Produto",
@@ -193,6 +210,7 @@ public class App {
                             "Qual o nome do Servico:",
                             "Cadastro Servico",
                             JOptionPane.DEFAULT_OPTION));
+
                         if (servico.getNome().isEmpty()) {
                             JOptionPane.showMessageDialog(null,
                                 "Campo nome nao foi preenchido!",
@@ -205,7 +223,16 @@ public class App {
                                     "Cadastro Servico",
                                     JOptionPane.DEFAULT_OPTION)));
 
-                                validacao=true;
+                                if (servico.getValor()<=0){
+                                    JOptionPane.showMessageDialog(null,
+                                        "O valor deve ser maior que 0!",
+                                        "Cadastro Servico",
+                                        JOptionPane.ERROR_MESSAGE); 
+
+                                    validacao=false;
+                                } else {
+                                    validacao=true;
+                                }
                             } catch (Exception e) {
                                 JOptionPane.showMessageDialog(null,
                                     "Valor invalido!",
@@ -221,8 +248,16 @@ public class App {
                                         "Cadastro Servico",
                                         JOptionPane.DEFAULT_OPTION)));
 
-                                    servico.addServico(new Servico(servico.getNome(), servico.getValor(), servico.getGarantia())); 
-                                    servico.setQtdServicos(servico.getQtdServicos()+1);
+                                    if (servico.getGarantia()<=0){
+                                        JOptionPane.showMessageDialog(null,
+                                            "A garantia deve ser maior que 0!",
+                                            "Cadastro Servico",
+                                            JOptionPane.ERROR_MESSAGE); 
+        
+                                    } else {
+                                        servico.addServico(new Servico(servico.getNome(), servico.getValor(), servico.getGarantia())); 
+                                        servico.setQtdServicos(servico.getQtdServicos()+1);
+                                    }
                                 } catch (Exception e) {
                                     JOptionPane.showMessageDialog(null,
                                         "Garantia invalida!",
@@ -272,8 +307,7 @@ public class App {
 
                     // Mostrar Pessoa Juridica
                     if (MENUCADASTRO.getSelectedItem().equals("Cliente Pessoa Juridica")) {
-                        if (pessoaJuridica.getQtdCllientesPj().equals(0))
-                        {
+                        if (pessoaJuridica.getQtdCllientesPj().equals(0)){
                             JOptionPane.showMessageDialog(null,
                                 "Nao existem registros!",
                                 "Clientes Pessoa Juridica:",
@@ -287,7 +321,7 @@ public class App {
                     }
 
                     // Mostrar Produtos
-                    if (MENUCADASTRO.getSelectedItem().equals("Produto")) {
+                    if (MENUCADASTRO.getSelectedItem().equals("Produto")){
                         if (produto.getQtdprodutos().equals(0))
                         {
                             JOptionPane.showMessageDialog(null,
@@ -388,7 +422,16 @@ public class App {
                                 "Registrar venda",
                                 JOptionPane.DEFAULT_OPTION)));
                             
-                            validacao = true;
+                            if (vendasRealizadas.getQuant()<=0){
+                                JOptionPane.showMessageDialog(null,
+                                    "A quantidade deve ser maior que 0!",
+                                    "Registrar venda",
+                                    JOptionPane.ERROR_MESSAGE);
+                                
+                                validacao=false;
+                            } else {
+                                validacao=true;
+                            }
                         } catch (Exception e) {
                             JOptionPane.showMessageDialog(null,
                                 "Quantidade invalida!",

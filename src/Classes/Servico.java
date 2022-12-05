@@ -3,7 +3,7 @@ package Classes;
 import java.util.ArrayList;
 
 public class Servico {
-    Integer qtdServicos;
+    Integer qtdServicos=0;
 
     String nome;
     Double valor;
@@ -58,7 +58,7 @@ public class Servico {
         int i=1;
 
         for (Servico servico : servicos) {
-            mostraProdutos += "Produto "+i+":\n  Nome: "+servico.nome+"\n  Valor: R$ "+String.format("%.2f", servico.valor)+"\n  Garantia: "+servico.garantia+" meses\n\n"; 
+            mostraProdutos += "Servico "+i+":\n  Nome: "+servico.nome+"\n  Valor: R$ "+String.format("%.2f", servico.valor)+"\n  Garantia: "+servico.garantia+" meses\n\n"; 
             i++; 
         }
 
@@ -70,7 +70,7 @@ public class Servico {
         Double []valor = new Double[] {30.50,50.99,75.00};
         Integer []garantia = new Integer[] {3,3,6};
         
-        for (int i=0; i<3; i++){
+        for (int i=0; i<nome.length; i++){
             addServico(new Servico(nome[i], valor[i], garantia[i]));
             setQtdServicos(getQtdServicos()+1);
         }

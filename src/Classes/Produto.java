@@ -70,7 +70,7 @@ public class Produto {
         Double []valor = new Double[] {500.99,299.99,875.99};
         Integer []garantia = new Integer[] {12,3,6};
         
-        for (int i=0; i<3; i++){
+        for (int i=0; i<nome.length; i++){
             addProduto(new Produto(nome[i], valor[i], garantia[i]));
             setQtdprodutos(getQtdprodutos()+1);
         }

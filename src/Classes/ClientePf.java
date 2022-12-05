@@ -50,7 +50,7 @@ public class ClientePf extends Cliente {
         String []nome = new String[] {"Fernando", "Luis", "Felipe"};
         String []cpf = new String[] {"123789456", "234567894", "512689435"};
 
-        for (int i=0; i<3; i++){
+        for (int i=0; i<nome.length; i++){
             addClientePf(new ClientePf(nome[i], cpf[i]));
             setQtdClientesPf(getQtdClientesPf()+1);
         }
