@@ -1,6 +1,7 @@
 package Classes;
 
 public abstract class VendaServicoRealizadas {
+    String identificacao;
     String dataVendaServico;
 
     String cliente;
@@ -13,7 +14,8 @@ public abstract class VendaServicoRealizadas {
     String obs;
     Integer garantia;
 
-    public VendaServicoRealizadas (String dataVendaServico, String cliente, String documento, String tipoCliente, String produtoServico, Double valorTot, String obs, Integer garantia){
+    public VendaServicoRealizadas (String identificacao, String dataVendaServico, String cliente, String documento, String tipoCliente, String produtoServico, Double valorTot, String obs, Integer garantia){
+        this.identificacao = identificacao;
         this.dataVendaServico = dataVendaServico;
         this.cliente = cliente;
         this.documento = documento;
@@ -22,6 +24,15 @@ public abstract class VendaServicoRealizadas {
         this.valorTot = valorTot;
         this.obs = obs;
         this.garantia = garantia;
+    }
+
+    // Data venda
+    public String getIdentificacao (){
+        return identificacao;
+    }
+
+    public void setIdentificacao (String identificacao){
+        this.identificacao = identificacao;
     }
 
     // Data venda

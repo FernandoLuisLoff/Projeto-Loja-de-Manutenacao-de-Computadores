@@ -8,8 +8,8 @@ public class ServicosRealizados extends VendaServicoRealizadas{
 
     ArrayList<ServicosRealizados> servicos = new ArrayList<>();
 
-    public ServicosRealizados (String dataVendaServico, String cliente, String documento, String tipoCliente, String produtoServico, Double valorTot, String obs, Integer garantia){
-        super(dataVendaServico, cliente, documento, tipoCliente, produtoServico, valorTot, obs, garantia);
+    public ServicosRealizados (String identificacao, String dataVendaServico, String cliente, String documento, String tipoCliente, String produtoServico, Double valorTot, String obs, Integer garantia){
+        super(identificacao, dataVendaServico, cliente, documento, tipoCliente, produtoServico, valorTot, obs, garantia);
     }
     
     public void addServico (ServicosRealizados servico){

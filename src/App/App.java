@@ -17,20 +17,29 @@ import Classes.ServicosRealizados;
 public class App {
     public static void main(String[] args) throws Exception {
 
-        Controller control = new Controller();
+        String realizarCadastroStr = "Realizar cadastros";
+        String mostrarCadastroStr = "Mostrar cadastros";
+        
+        String registarVendaServicoStr = "Registrar uma venda ou servico realizado";
+        String vizualizarVendaServicoStr = "Vizualizar as vendas ou servicos realizados";
 
-        ClientePf pessoaFisica = new ClientePf("", "");
-        ClientePj pessoaJuridica = new ClientePj("", "");
-        Produto produto = new Produto("", 0.0, 0);
-        Servico servico = new Servico("", 0.0, 0);
-        VendasRealizadas vendasRealizadas = new VendasRealizadas(0, 0.0, "", "", "", "", "", 0.0, "", 0);
-        ServicosRealizados servicosRealizados = new ServicosRealizados("", "", "", "", "", 0.0, "", 0);
+        String pessoaFisicaStr = "Cliente Pessoa Fisica";
+        String pessoaJuridicaStr = "Cliente Pessoa Juridica";
 
-        String []menu = new String[] {"Realizar cadastros", "Mostrar cadastros", "Registrar uma venda ou servico realizado", "Vizualizar as vendas ou servicos realizados", "Sair"};
-        String []menuCadastro = new String[] {"Cliente Pessoa Fisica", "Cliente Pessoa Juridica", "Produto", "Servico", "Sair"};
-        String []menuVendasServicos = new String[] {"Venda", "Servico"};
-        String []tipoCliente = new String[] {"Cliente Pessoa Fisica", "Cliente Pessoa Juridica"};
-        String []confirmacao = new String[] {"Sim", "Nao"};
+        String produtoStr = "Produto";
+        String servicoStr = "Servico";
+        String vendaStr = "Venda";
+
+        String simStr = "Sim";
+        String naoStr = "Nao";
+
+        String sairStr = "Sair";
+
+        String []menu = new String[] {realizarCadastroStr, mostrarCadastroStr, registarVendaServicoStr, vizualizarVendaServicoStr, sairStr};
+        String []menuCadastro = new String[] {pessoaFisicaStr, pessoaJuridicaStr, produtoStr, servicoStr, sairStr};
+        String []menuVendasServicos = new String[] {vendaStr, servicoStr};
+        String []tipoCliente = new String[] {pessoaFisicaStr, pessoaJuridicaStr};
+        String []confirmacao = new String[] {simStr, naoStr};
 
         JComboBox MENU = new JComboBox(menu);
         JComboBox MENUCADASTRO = new JComboBox(menuCadastro);
@@ -38,10 +47,19 @@ public class App {
         JComboBox MENUTIPOCLIENTE = new JComboBox(tipoCliente);
         JComboBox CONFIRMACAO = new JComboBox(confirmacao);
 
+        ClientePf pessoaFisica = new ClientePf("", "");
+        ClientePj pessoaJuridica = new ClientePj("", "");
+        Produto produto = new Produto("", 0.0, 0);
+        Servico servico = new Servico("", 0.0, 0);
+        VendasRealizadas vendasRealizadas = new VendasRealizadas(0, 0.0, "", "", "", "", "", "", 0.0, "", 0);
+        ServicosRealizados servicosRealizados = new ServicosRealizados("", "", "", "", "", "", 0.0, "", 0);
+
+        Controller control = new Controller();
+
         SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy - HH:mm");
         Date hoje = new Date();
 
-        int documento=0;
+        int auxNum=0;
         boolean validacao=true;
 
         // Carregando dados nas arreys
@@ -57,7 +75,7 @@ public class App {
                 JOptionPane.DEFAULT_OPTION);
             
             // Fazer cadastros do sistema
-            if (MENU.getSelectedItem().equals("Realizar cadastros")) {
+            if (MENU.getSelectedItem().equals(realizarCadastroStr)) {
                 do {
                     JOptionPane.showMessageDialog(null,
                         MENUCADASTRO,
@@ -65,7 +83,7 @@ public class App {
                         JOptionPane.DEFAULT_OPTION);
 
                     // Cadastra Pessoa Fisica
-                    if (MENUCADASTRO.getSelectedItem().equals("Cliente Pessoa Fisica")) {
+                    if (MENUCADASTRO.getSelectedItem().equals(pessoaFisicaStr)) {
 
                         pessoaFisica.setNome(JOptionPane.showInputDialog(null,
                             "Qual o nome do cliente:",
@@ -84,12 +102,12 @@ public class App {
                                 JOptionPane.ERROR_MESSAGE);
                         } else {
                             try {
-                                documento = Integer.parseInt(JOptionPane.showInputDialog(null,
+                                auxNum = Integer.parseInt(JOptionPane.showInputDialog(null,
                                     "Qual o cpf do cliente:",
                                     "Cadastro Cliente Pessoa Fisica",
                                     JOptionPane.DEFAULT_OPTION));
 
-                                pessoaFisica.setCpf(Integer.toString(documento));
+                                pessoaFisica.setCpf(Integer.toString(auxNum));
 
                                 pessoaFisica.addClientePf(new ClientePf(pessoaFisica.getNome(),pessoaFisica.getCpf()));
                                 pessoaFisica.setQtdClientesPf(pessoaFisica.getQtdClientesPf()+1);
@@ -103,7 +121,7 @@ public class App {
                     }
 
                     // Cadastra Pessoa Juridica
-                    if (MENUCADASTRO.getSelectedItem().equals("Cliente Pessoa Juridica")) {
+                    if (MENUCADASTRO.getSelectedItem().equals(pessoaJuridicaStr)) {
 
                         pessoaJuridica.setNome(JOptionPane.showInputDialog(null,
                             "Qual o nome do cliente:",
@@ -121,12 +139,12 @@ public class App {
                                 JOptionPane.ERROR_MESSAGE);
                         } else {
                             try {
-                                documento = Integer.parseInt(JOptionPane.showInputDialog(null,
+                                auxNum = Integer.parseInt(JOptionPane.showInputDialog(null,
                                     "Qual o cnpj do cliente:",
                                     "Cadastro Cliente Pessoa Juridica",
                                     JOptionPane.DEFAULT_OPTION));
 
-                                pessoaJuridica.setCnpj(Integer.toString(documento));
+                                pessoaJuridica.setCnpj(Integer.toString(auxNum));
 
                                 pessoaJuridica.addClientePj(new ClientePj(pessoaJuridica.getNome(),pessoaJuridica.getCnpj()));
                                 pessoaJuridica.setQtdCllientesPj(pessoaJuridica.getQtdCllientesPj()+1);
@@ -140,7 +158,7 @@ public class App {
                     }
 
                     // Cadastra Produto
-                    if (MENUCADASTRO.getSelectedItem().equals("Produto")) {
+                    if (MENUCADASTRO.getSelectedItem().equals(produtoStr)) {
 
                         produto.setNome(JOptionPane.showInputDialog(null,
                             "Qual o nome do produto:",
@@ -204,7 +222,7 @@ public class App {
                     }
 
                     // Cadastra Servico
-                    if (MENUCADASTRO.getSelectedItem().equals("Servico")) {
+                    if (MENUCADASTRO.getSelectedItem().equals(servicoStr)) {
 
                         servico.setNome(JOptionPane.showInputDialog(null,
                             "Qual o nome do Servico:",
@@ -269,7 +287,7 @@ public class App {
                     }
 
                     // Sair
-                    if (MENUCADASTRO.getSelectedItem().equals("Sair")) {
+                    if (MENUCADASTRO.getSelectedItem().equals(sairStr)) {
                         break;
                     }
 
@@ -278,11 +296,11 @@ public class App {
                         "Realizar outro cadastro?",
                         JOptionPane.DEFAULT_OPTION);
 
-                } while (!CONFIRMACAO.getSelectedItem().equals("Nao"));
+                } while (!CONFIRMACAO.getSelectedItem().equals(naoStr));
             }
 
             // Mostrar cadastros do sistema
-            if (MENU.getSelectedItem().equals("Mostrar cadastros")) {
+            if (MENU.getSelectedItem().equals(mostrarCadastroStr)) {
                 do {
                     JOptionPane.showMessageDialog(null,
                         MENUCADASTRO,
@@ -290,7 +308,7 @@ public class App {
                         JOptionPane.DEFAULT_OPTION);
 
                     // Mostrar Pessoa Fisica
-                    if (MENUCADASTRO.getSelectedItem().equals("Cliente Pessoa Fisica")) {
+                    if (MENUCADASTRO.getSelectedItem().equals(pessoaFisicaStr)) {
                         if (pessoaFisica.getQtdClientesPf().equals(0))
                         {
                             JOptionPane.showMessageDialog(null,
@@ -306,7 +324,7 @@ public class App {
                     }
 
                     // Mostrar Pessoa Juridica
-                    if (MENUCADASTRO.getSelectedItem().equals("Cliente Pessoa Juridica")) {
+                    if (MENUCADASTRO.getSelectedItem().equals(pessoaJuridicaStr)) {
                         if (pessoaJuridica.getQtdCllientesPj().equals(0)){
                             JOptionPane.showMessageDialog(null,
                                 "Nao existem registros!",
@@ -321,7 +339,7 @@ public class App {
                     }
 
                     // Mostrar Produtos
-                    if (MENUCADASTRO.getSelectedItem().equals("Produto")){
+                    if (MENUCADASTRO.getSelectedItem().equals(produtoStr)){
                         if (produto.getQtdprodutos().equals(0))
                         {
                             JOptionPane.showMessageDialog(null,
@@ -337,7 +355,7 @@ public class App {
                     }
 
                     // Mostrar Servicos
-                    if (MENUCADASTRO.getSelectedItem().equals("Servico")) {
+                    if (MENUCADASTRO.getSelectedItem().equals(servicoStr)) {
                         if (servico.getQtdServicos().equals(0))
                         {
                             JOptionPane.showMessageDialog(null,
@@ -353,7 +371,7 @@ public class App {
                     }
 
                     // Sair
-                    if (MENUCADASTRO.getSelectedItem().equals("Sair")) {
+                    if (MENUCADASTRO.getSelectedItem().equals(sairStr)) {
                         break;
                     }
                         
@@ -362,11 +380,11 @@ public class App {
                         "Mostrar outro cadastro?",
                         JOptionPane.DEFAULT_OPTION);
 
-                } while (!CONFIRMACAO.getSelectedItem().equals("Nao"));
+                } while (!CONFIRMACAO.getSelectedItem().equals(naoStr));
             }
 
             // Registrar uma venda ou servico
-            if (MENU.getSelectedItem().equals("Registrar uma venda ou servico realizado")) {
+            if (MENU.getSelectedItem().equals(registarVendaServicoStr)) {
                 do {
                     JComboBox CLIENTESPF = new JComboBox(pessoaFisica.arreyNomesPf());
                     JComboBox CLIENTESPJ = new JComboBox(pessoaJuridica.arreyNomesPj());
@@ -379,143 +397,169 @@ public class App {
                         JOptionPane.DEFAULT_OPTION);
 
                     // Registrar uma venda
-                    if (MENUVENDASSERVICOS.getSelectedItem().equals("Venda")){
+                    if (MENUVENDASSERVICOS.getSelectedItem().equals(vendaStr)){
 
-                        JOptionPane.showMessageDialog(null,
-                            MENUTIPOCLIENTE,
-                            "Qual o tipo do cliente:",
-                            JOptionPane.DEFAULT_OPTION);
+                        vendasRealizadas.setIdentificacao(JOptionPane.showInputDialog(null,
+                            "Qual é o identificador da venda:",
+                            "Registrar venda",
+                            JOptionPane.DEFAULT_OPTION));
 
-                        vendasRealizadas.setDataVendaServico(dt.format(hoje.getTime()));
-                        vendasRealizadas.setTipoCliente(MENUVENDASSERVICOS.getSelectedItem().toString());
-
-                        if (MENUTIPOCLIENTE.getSelectedItem().equals("Cliente Pessoa Fisica")) {
+                        if (vendasRealizadas.getIdentificacao().isEmpty()){
                             JOptionPane.showMessageDialog(null,
-                                CLIENTESPF,
-                                "Selecione o cliente:",
-                                JOptionPane.DEFAULT_OPTION);
-
-                            vendasRealizadas.setCliente(MENUTIPOCLIENTE.getSelectedItem().toString());
-                            vendasRealizadas.setDocumento(pessoaFisica.retornaDocumento(CLIENTESPF.getSelectedIndex()));
-                        } else {
-                            JOptionPane.showMessageDialog(null,
-                                CLIENTESPJ,
-                                "Selecione o cliente:",
-                                JOptionPane.DEFAULT_OPTION);
-
-                            vendasRealizadas.setCliente(CLIENTESPJ.getSelectedItem().toString());
-                            vendasRealizadas.setDocumento(pessoaJuridica.retornaDocumento(CLIENTESPJ.getSelectedIndex()));
-                        }
-
-                        JOptionPane.showMessageDialog(null,
-                            PRODUTOS,
-                            "Selecione o Produto:",
-                            JOptionPane.DEFAULT_OPTION);
-
-                        vendasRealizadas.setProdutoServico(PRODUTOS.getSelectedItem().toString());
-                        vendasRealizadas.setValorUnit(produto.retornaValorUnit(PRODUTOS.getSelectedIndex()));
-                        vendasRealizadas.setGarantia(produto.retornaGarantia(PRODUTOS.getSelectedIndex()));
-
-                        try {
-                            vendasRealizadas.setQuant(Integer.parseInt(JOptionPane.showInputDialog(null,
-                                "Quantidade de produtos:",
+                                "Campo identificador nao foi preenchido!",
                                 "Registrar venda",
-                                JOptionPane.DEFAULT_OPTION)));
-                            
-                            if (vendasRealizadas.getQuant()<=0){
+                                JOptionPane.ERROR_MESSAGE);
+                        } else {
+
+                            JOptionPane.showMessageDialog(null,
+                                MENUTIPOCLIENTE,
+                                "Qual o tipo do cliente:",
+                                JOptionPane.DEFAULT_OPTION);
+
+                            vendasRealizadas.setDataVendaServico(dt.format(hoje.getTime()));
+                            vendasRealizadas.setTipoCliente(MENUVENDASSERVICOS.getSelectedItem().toString());
+
+                            if (MENUTIPOCLIENTE.getSelectedItem().equals(pessoaFisicaStr)) {
                                 JOptionPane.showMessageDialog(null,
-                                    "A quantidade deve ser maior que 0!",
+                                    CLIENTESPF,
+                                    "Selecione o cliente:",
+                                    JOptionPane.DEFAULT_OPTION);
+
+                                vendasRealizadas.setCliente(MENUTIPOCLIENTE.getSelectedItem().toString());
+                                vendasRealizadas.setDocumento(pessoaFisica.retornaDocumento(CLIENTESPF.getSelectedIndex()));
+                            } else {
+                                JOptionPane.showMessageDialog(null,
+                                    CLIENTESPJ,
+                                    "Selecione o cliente:",
+                                    JOptionPane.DEFAULT_OPTION);
+
+                                vendasRealizadas.setCliente(CLIENTESPJ.getSelectedItem().toString());
+                                vendasRealizadas.setDocumento(pessoaJuridica.retornaDocumento(CLIENTESPJ.getSelectedIndex()));
+                            }
+
+                            JOptionPane.showMessageDialog(null,
+                                PRODUTOS,
+                                "Selecione o Produto:",
+                                JOptionPane.DEFAULT_OPTION);
+
+                            vendasRealizadas.setProdutoServico(PRODUTOS.getSelectedItem().toString());
+                            vendasRealizadas.setValorUnit(produto.retornaValorUnit(PRODUTOS.getSelectedIndex()));
+                            vendasRealizadas.setGarantia(produto.retornaGarantia(PRODUTOS.getSelectedIndex()));
+
+                            try {
+                                vendasRealizadas.setQuant(Integer.parseInt(JOptionPane.showInputDialog(null,
+                                    "Quantidade de produtos:",
+                                    "Registrar venda",
+                                    JOptionPane.DEFAULT_OPTION)));
+                                
+                                if (vendasRealizadas.getQuant()<=0){
+                                    JOptionPane.showMessageDialog(null,
+                                        "A quantidade deve ser maior que 0!",
+                                        "Registrar venda",
+                                        JOptionPane.ERROR_MESSAGE);
+                                    
+                                    validacao=false;
+                                } else {
+                                    validacao=true;
+                                }
+                            } catch (Exception e) {
+                                JOptionPane.showMessageDialog(null,
+                                    "Quantidade invalida!",
                                     "Registrar venda",
                                     JOptionPane.ERROR_MESSAGE);
                                 
-                                validacao=false;
-                            } else {
-                                validacao=true;
+                                validacao = false;
                             }
-                        } catch (Exception e) {
-                            JOptionPane.showMessageDialog(null,
-                                "Quantidade invalida!",
-                                "Registrar venda",
-                                JOptionPane.ERROR_MESSAGE);
-                            
-                            validacao = false;
-                        }
 
-                        if (validacao){
-                            vendasRealizadas.setValorTot(vendasRealizadas.getValorUnit()*vendasRealizadas.getQuant());
+                            if (validacao){
+                                vendasRealizadas.setValorTot(vendasRealizadas.getValorUnit()*vendasRealizadas.getQuant());
 
-                            vendasRealizadas.setObs(JOptionPane.showInputDialog(null,
-                                "Observacao da venda:",
-                                "Registrar venda",
-                                JOptionPane.DEFAULT_OPTION));
-
-                            if (vendasRealizadas.getObs().isEmpty()) {
-                                JOptionPane.showMessageDialog(null,
-                                    "Campo observacao nao foi preenchido!",
+                                vendasRealizadas.setObs(JOptionPane.showInputDialog(null,
+                                    "Observacao da venda:",
                                     "Registrar venda",
-                                    JOptionPane.ERROR_MESSAGE);
-                            } else {
-                                vendasRealizadas.addVenda(new VendasRealizadas(vendasRealizadas.getQuant(), vendasRealizadas.getValorUnit(), vendasRealizadas.getDataVendaServico(), vendasRealizadas.getCliente(), vendasRealizadas.getDocumento(), vendasRealizadas.getTipoCliente(), vendasRealizadas.getProdutoServico(), vendasRealizadas.getValorTot(), vendasRealizadas.getObs(), vendasRealizadas.getGarantia()));
-                            
-                                vendasRealizadas.recibo(vendasRealizadas.getQtdVendas());
-                                vendasRealizadas.setQtdVendas(vendasRealizadas.getQtdVendas()+1);
+                                    JOptionPane.DEFAULT_OPTION));
+
+                                if (vendasRealizadas.getObs().isEmpty()) {
+                                    JOptionPane.showMessageDialog(null,
+                                        "Campo observacao nao foi preenchido!",
+                                        "Registrar venda",
+                                        JOptionPane.ERROR_MESSAGE);
+                                } else {
+                                    vendasRealizadas.addVenda(new VendasRealizadas(vendasRealizadas.getQuant(), vendasRealizadas.getValorUnit(), vendasRealizadas.getIdentificacao(), vendasRealizadas.getDataVendaServico(), vendasRealizadas.getCliente(), vendasRealizadas.getDocumento(), vendasRealizadas.getTipoCliente(), vendasRealizadas.getProdutoServico(), vendasRealizadas.getValorTot(), vendasRealizadas.getObs(), vendasRealizadas.getGarantia()));
+                                
+                                    vendasRealizadas.recibo(vendasRealizadas.getQtdVendas());
+                                    vendasRealizadas.setQtdVendas(vendasRealizadas.getQtdVendas()+1);
+                                }
                             }
                         }
                     }
 
                     // Registrar uma servico prestado
-                    if (MENUVENDASSERVICOS.getSelectedItem().equals("Servico")){
-                        
-                        JOptionPane.showMessageDialog(null,
-                            MENUTIPOCLIENTE,
-                            "Qual o tipo do cliente:",
-                            JOptionPane.DEFAULT_OPTION);
+                    if (MENUVENDASSERVICOS.getSelectedItem().equals(servicoStr)){
 
-                        servicosRealizados.setDataVendaServico(dt.format(hoje.getTime()));
-                        servicosRealizados.setTipoCliente(MENUVENDASSERVICOS.getSelectedItem().toString());
-
-                        if (MENUTIPOCLIENTE.getSelectedItem().equals("Cliente Pessoa Fisica")) {
-                            JOptionPane.showMessageDialog(null,
-                                CLIENTESPF,
-                                "Selecione o cliente:",
-                                JOptionPane.DEFAULT_OPTION);
-
-                            servicosRealizados.setCliente(MENUTIPOCLIENTE.getSelectedItem().toString());
-                            servicosRealizados.setDocumento(pessoaFisica.retornaDocumento(CLIENTESPF.getSelectedIndex()));
-                        } else {
-                            JOptionPane.showMessageDialog(null,
-                                CLIENTESPJ,
-                                "Selecione o cliente:",
-                                JOptionPane.DEFAULT_OPTION);
-
-                            servicosRealizados.setCliente(CLIENTESPJ.getSelectedItem().toString());
-                            servicosRealizados.setDocumento(pessoaJuridica.retornaDocumento(CLIENTESPJ.getSelectedIndex()));
-                        }
-
-                        JOptionPane.showMessageDialog(null,
-                            SERVICOS,
-                            "Selecione o Servicos:",
-                            JOptionPane.DEFAULT_OPTION);
-
-                        servicosRealizados.setProdutoServico(SERVICOS.getSelectedItem().toString());
-                        servicosRealizados.setValorTot(servico.retornaValor(SERVICOS.getSelectedIndex()));
-                        servicosRealizados.setGarantia(servico.retornaGarantia(SERVICOS.getSelectedIndex()));
-
-                        servicosRealizados.setObs(JOptionPane.showInputDialog(null,
-                            "Observacao do servico:",
+                        servicosRealizados.setIdentificacao(JOptionPane.showInputDialog(null,
+                            "Qual é o identificador do servico:",
                             "Registrar servico",
                             JOptionPane.DEFAULT_OPTION));
 
-                        if (servicosRealizados.getObs().isEmpty()) {
+                        if (servicosRealizados.getIdentificacao().isEmpty()){
                             JOptionPane.showMessageDialog(null,
-                                "Campo observacao nao foi preenchido!",
+                                "Campo identificador nao foi preenchido!",
                                 "Registrar servico",
                                 JOptionPane.ERROR_MESSAGE);
                         } else {
-                            servicosRealizados.addServico(new ServicosRealizados( servicosRealizados.getDataVendaServico(), servicosRealizados.getCliente(), servicosRealizados.getDocumento(), servicosRealizados.getTipoCliente(), servicosRealizados.getProdutoServico(), servicosRealizados.getValorTot(), servicosRealizados.getObs(), servicosRealizados.getGarantia()));
                         
-                            servicosRealizados.recibo(servicosRealizados.getQtdServicos());
-                            servicosRealizados.setQtdServicos(servicosRealizados.getQtdServicos()+1);
+                            JOptionPane.showMessageDialog(null,
+                                MENUTIPOCLIENTE,
+                                "Qual o tipo do cliente:",
+                                JOptionPane.DEFAULT_OPTION);
+
+                            servicosRealizados.setDataVendaServico(dt.format(hoje.getTime()));
+                            servicosRealizados.setTipoCliente(MENUVENDASSERVICOS.getSelectedItem().toString());
+
+                            if (MENUTIPOCLIENTE.getSelectedItem().equals(pessoaFisicaStr)) {
+                                JOptionPane.showMessageDialog(null,
+                                    CLIENTESPF,
+                                    "Selecione o cliente:",
+                                    JOptionPane.DEFAULT_OPTION);
+
+                                servicosRealizados.setCliente(MENUTIPOCLIENTE.getSelectedItem().toString());
+                                servicosRealizados.setDocumento(pessoaFisica.retornaDocumento(CLIENTESPF.getSelectedIndex()));
+                            } else {
+                                JOptionPane.showMessageDialog(null,
+                                    CLIENTESPJ,
+                                    "Selecione o cliente:",
+                                    JOptionPane.DEFAULT_OPTION);
+
+                                servicosRealizados.setCliente(CLIENTESPJ.getSelectedItem().toString());
+                                servicosRealizados.setDocumento(pessoaJuridica.retornaDocumento(CLIENTESPJ.getSelectedIndex()));
+                            }
+
+                            JOptionPane.showMessageDialog(null,
+                                SERVICOS,
+                                "Selecione o Servicos:",
+                                JOptionPane.DEFAULT_OPTION);
+
+                            servicosRealizados.setProdutoServico(SERVICOS.getSelectedItem().toString());
+                            servicosRealizados.setValorTot(servico.retornaValor(SERVICOS.getSelectedIndex()));
+                            servicosRealizados.setGarantia(servico.retornaGarantia(SERVICOS.getSelectedIndex()));
+
+                            servicosRealizados.setObs(JOptionPane.showInputDialog(null,
+                                "Observacao do servico:",
+                                "Registrar servico",
+                                JOptionPane.DEFAULT_OPTION));
+
+                            if (servicosRealizados.getObs().isEmpty()) {
+                                JOptionPane.showMessageDialog(null,
+                                    "Campo observacao nao foi preenchido!",
+                                    "Registrar servico",
+                                    JOptionPane.ERROR_MESSAGE);
+                            } else {
+                                servicosRealizados.addServico(new ServicosRealizados(servicosRealizados.getIdentificacao(), servicosRealizados.getDataVendaServico(), servicosRealizados.getCliente(), servicosRealizados.getDocumento(), servicosRealizados.getTipoCliente(), servicosRealizados.getProdutoServico(), servicosRealizados.getValorTot(), servicosRealizados.getObs(), servicosRealizados.getGarantia()));
+                            
+                                servicosRealizados.recibo(servicosRealizados.getQtdServicos());
+                                servicosRealizados.setQtdServicos(servicosRealizados.getQtdServicos()+1);
+                            }
                         }
                     }
 
@@ -524,9 +568,9 @@ public class App {
                         "Realizar outra venda ou servico?",
                         JOptionPane.DEFAULT_OPTION);
 
-                } while (!CONFIRMACAO.getSelectedItem().equals("Nao"));
+                } while (!CONFIRMACAO.getSelectedItem().equals(naoStr));
             }
 
-        } while (!MENU.getSelectedItem().equals("Sair"));
+        } while (!MENU.getSelectedItem().equals(sairStr));
     }
 }

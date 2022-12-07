@@ -11,8 +11,8 @@ public class VendasRealizadas extends VendaServicoRealizadas{
 
     ArrayList<VendasRealizadas> vendas = new ArrayList<>();
 
-    public VendasRealizadas (Integer quant,  Double valorUnit, String dataVendaServico, String cliente, String documento, String tipoCliente, String produtoServico, Double valorTot, String obs, Integer garantia){
-        super(dataVendaServico, cliente, documento, tipoCliente, produtoServico, valorTot, obs, garantia);
+    public VendasRealizadas (Integer quant,  Double valorUnit, String identificacao, String dataVendaServico, String cliente, String documento, String tipoCliente, String produtoServico, Double valorTot, String obs, Integer garantia){
+        super(identificacao, dataVendaServico, cliente, documento, tipoCliente, produtoServico, valorTot, obs, garantia);
         this.quant = quant;
         this.valorUnit = valorUnit;
     }
