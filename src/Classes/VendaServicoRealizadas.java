@@ -11,10 +11,13 @@ public abstract class VendaServicoRealizadas {
     String produtoServico;
     Double valorTot;
 
+    String formaPgto;
+    String parcelasPgto;
+
     String obs;
     Integer garantia;
 
-    public VendaServicoRealizadas (String identificacao, String dataVendaServico, String cliente, String documento, String tipoCliente, String produtoServico, Double valorTot, String obs, Integer garantia){
+    public VendaServicoRealizadas (String identificacao, String dataVendaServico, String cliente, String documento, String tipoCliente, String produtoServico, Double valorTot, String obs, Integer garantia, String formaPgto, String parcelasPgto){
         this.identificacao = identificacao;
         this.dataVendaServico = dataVendaServico;
         this.cliente = cliente;
@@ -24,6 +27,8 @@ public abstract class VendaServicoRealizadas {
         this.valorTot = valorTot;
         this.obs = obs;
         this.garantia = garantia;
+        this.formaPgto = formaPgto;
+        this.parcelasPgto = parcelasPgto;
     }
 
     // Data venda
@@ -105,6 +110,24 @@ public abstract class VendaServicoRealizadas {
 
     public void setGarantia (Integer garantia){
         this.garantia = garantia;
+    }
+
+    // Forma pagamento
+    public String getFormaPgto (){
+        return formaPgto;
+    }
+
+    public void setFormaPgto (String formaPgto){
+        this.formaPgto = formaPgto;
+    }
+
+    // Parcelas pagamento
+    public String getParcelasPgto (){
+        return parcelasPgto;
+    }
+
+    public void setParcelasPgto (String parcelasPgto){
+        this.parcelasPgto = parcelasPgto;
     }
     
 }

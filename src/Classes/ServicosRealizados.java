@@ -6,10 +6,12 @@ import javax.swing.JOptionPane;
 public class ServicosRealizados extends VendaServicoRealizadas{
     Integer qtdServicos=0;
 
+    Controller control = new Controller();
+
     ArrayList<ServicosRealizados> servicos = new ArrayList<>();
 
-    public ServicosRealizados (String identificacao, String dataVendaServico, String cliente, String documento, String tipoCliente, String produtoServico, Double valorTot, String obs, Integer garantia){
-        super(identificacao, dataVendaServico, cliente, documento, tipoCliente, produtoServico, valorTot, obs, garantia);
+    public ServicosRealizados (String identificacao, String dataVendaServico, String cliente, String documento, String tipoCliente, String produtoServico, Double valorTot, String obs, Integer garantia, String formaPgto, String parcelasPgto){
+        super(identificacao, dataVendaServico, cliente, documento, tipoCliente, produtoServico, valorTot, obs, garantia, formaPgto, parcelasPgto);
     }
     
     public void addServico (ServicosRealizados servico){
@@ -25,16 +27,29 @@ public class ServicosRealizados extends VendaServicoRealizadas{
     }
 
     public void recibo (Integer index){
+
+        String parcelamento="";
+        Double valorParcela=0.0;
+
+        try {
+            valorParcela=servicos.get(index).valorTot/Integer.parseInt(servicos.get(index).parcelasPgto);
+            parcelamento=servicos.get(index).parcelasPgto+"X R$ "+String.format("%.2f", valorParcela);
+        } catch (Exception e) {
+            parcelamento=servicos.get(index).parcelasPgto;
+        }
+
         JOptionPane.showMessageDialog(null,
-        "---------- Recibo do Servico "+(index+1)+" ----------\n"+
-        "  Data do servico: "+servicos.get(index).dataVendaServico+"\n\n"+
+        "  Recibo do Servico: "+servicos.get(index).identificacao+"    Data do servico: "+servicos.get(index).dataVendaServico+"\n\n"+
+        "  Nome do Estabelecimento: "+control.nomeEstab+"    CNPJ: "+control.cnpjEstab+"\n"+
+        "  Endereco: "+control.enderecoEstab+"\n"+
+        "  Telefone: "+control.telefoneEstab+"    Email: "+control.emailEstab+"\n\n"+
         "  Tipo de cliente: "+servicos.get(index).tipoCliente+"\n"+
-        "  Cliente: "+servicos.get(index).cliente+"\n"+
-        "  Documento: "+servicos.get(index).documento+"\n\n"+
+        "  Cliente: "+servicos.get(index).cliente+"  CPF/CNPJ: "+servicos.get(index).documento+"\n\n"+
         "  Servico: "+servicos.get(index).produtoServico+"\n"+
-        "  Valor: R$ "+String.format("%.2f", servicos.get(index).valorTot)+"\n\n"+
+        "  Valor: R$ "+String.format("%.2f", servicos.get(index).valorTot)+"\n"+
+        "  Forma de pagamento: "+servicos.get(index).formaPgto+"    Parcelamento: "+parcelamento+"\n\n"+
         "  Observacao: "+servicos.get(index).obs+"\n"+
-        "  Garantia: "+servicos.get(index).garantia+" meses",
+        "  Garantia: "+servicos.get(index).garantia+" meses\n",
         "Recibo",
         JOptionPane.DEFAULT_OPTION);
     }
