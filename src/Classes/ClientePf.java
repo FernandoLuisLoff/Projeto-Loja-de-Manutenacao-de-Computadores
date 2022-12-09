@@ -33,13 +33,17 @@ public class ClientePf extends Cliente {
         clientes.remove(index.intValue());
     }
 
-    public String readClientes (){
+    public String readClientes (String nome, String cpf){
         String mostraClientes="";
         int i=1;
 
         for (ClientePf cliente : clientes){
-            mostraClientes += "Cliente "+i+":\n  Nome: "+cliente.nome+"\n  Cpf: "+cliente.cpf+"\n\n"; 
-            i++; 
+            if (cliente.nome.contains(nome)){
+                if (cliente.cpf.contains(cpf)){
+                    mostraClientes += "Cliente "+i+":\n  Nome: "+cliente.nome+"\n  Cpf: "+cliente.cpf+"\n\n"; 
+                    i++; 
+                }
+            }
         }
 
         return mostraClientes;

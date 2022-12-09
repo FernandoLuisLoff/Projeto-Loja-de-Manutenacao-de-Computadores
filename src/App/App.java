@@ -73,6 +73,7 @@ public class App {
         Date hoje = new Date();
 
         int auxNum=0;
+        String mostraClientes="", nome="", documento="";
         boolean validacao=true;
 
         // Carregando dados nas arreys
@@ -318,32 +319,109 @@ public class App {
 
                     // Mostrar Pessoa Fisica
                     if (MENUCADASTRO.getSelectedItem().equals(pessoaFisicaStr)) {
-                        if (pessoaFisica.getSizeArreyClientesPf().equals(0))
-                        {
+
+                        nome=JOptionPane.showInputDialog(null,
+                            "Qual o nome do cliente que deseja mostrar?\n"+
+                            "Para ver todos deixe o campo vazio.",
+                            "Clientes Pessoa Fisica:",
+                            JOptionPane.DEFAULT_OPTION);
+
+                        if (control.validaSemNum(nome)) {
                             JOptionPane.showMessageDialog(null,
-                                "Nao existem registros!",
+                                "Foram digitados numeros no nome!",
                                 "Clientes Pessoa Fisica:",
                                 JOptionPane.ERROR_MESSAGE);
                         } else {
-                            JOptionPane.showMessageDialog(null,
-                                pessoaFisica.readClientes(),
-                                "Clientes Pessoa Fisica:",
-                                JOptionPane.DEFAULT_OPTION);
+                            try {
+                                documento=JOptionPane.showInputDialog(null,
+                                    "Qual o cpf do cliente que deseja mostrar?\n"+
+                                    "Para ver todos deixe o campo vazio.",
+                                    "Clientes Pessoa Fisica:",
+                                    JOptionPane.DEFAULT_OPTION);
+
+                                if (!documento.isEmpty()){
+                                    Integer.parseInt(documento);
+                                }
+                                validacao=true;
+                            } catch (Exception e) {
+                                JOptionPane.showMessageDialog(null,
+                                    "Documento invalido!",
+                                    "Clientes Pessoa Fisica:",
+                                    JOptionPane.ERROR_MESSAGE); 
+                                
+                                validacao=false;
+                            }
+
+                            if (validacao){
+                                
+                                mostraClientes=pessoaFisica.readClientes(nome, documento);
+
+                                if (pessoaFisica.getSizeArreyClientesPf().equals(0) || mostraClientes.equals("")){
+                                    JOptionPane.showMessageDialog(null,
+                                        "Nao existem registros!",
+                                        "Clientes Pessoa Fisica:",
+                                        JOptionPane.ERROR_MESSAGE);
+                                } else {
+                                    JOptionPane.showMessageDialog(null,
+                                        mostraClientes,
+                                        "Clientes Pessoa Fisica:",
+                                        JOptionPane.DEFAULT_OPTION);
+                                }
+                            }
                         }
                     }
 
                     // Mostrar Pessoa Juridica
                     if (MENUCADASTRO.getSelectedItem().equals(pessoaJuridicaStr)) {
-                        if (pessoaJuridica.getSizeArreyClientesPj().equals(0)){
+
+                        nome=JOptionPane.showInputDialog(null,
+                            "Qual o nome do cliente que deseja mostrar?\n"+
+                            "Para ver todos deixe o campo vazio.",
+                            "Clientes Pessoa Juridica:",
+                            JOptionPane.DEFAULT_OPTION);
+
+                        if (control.validaSemNum(nome)) {
                             JOptionPane.showMessageDialog(null,
-                                "Nao existem registros!",
+                                "Foram digitados numeros no nome!",
                                 "Clientes Pessoa Juridica:",
                                 JOptionPane.ERROR_MESSAGE);
                         } else {
-                            JOptionPane.showMessageDialog(null,
-                                pessoaJuridica.readClientes(),
-                                "Clientes Pessoa Juridica:",
-                                JOptionPane.DEFAULT_OPTION);
+                            try {
+                                documento=JOptionPane.showInputDialog(null,
+                                    "Qual o cnpj do cliente que deseja mostrar?\n"+
+                                    "Para ver todos deixe o campo vazio.",
+                                    "Clientes Pessoa Juridica:",
+                                    JOptionPane.DEFAULT_OPTION);
+
+                                if (!documento.isEmpty()){
+                                    Integer.parseInt(documento);
+                                }
+                                validacao=true;
+                            } catch (Exception e) {
+                                JOptionPane.showMessageDialog(null,
+                                    "Documento invalido!",
+                                    "Clientes Pessoa Juridica:",
+                                    JOptionPane.ERROR_MESSAGE); 
+                                
+                                validacao=false;
+                            }
+
+                            if (validacao){
+                            
+                                mostraClientes=pessoaJuridica.readClientes(nome, documento);
+
+                                if (pessoaJuridica.getSizeArreyClientesPj().equals(0) || mostraClientes.equals("")){
+                                    JOptionPane.showMessageDialog(null,
+                                        "Nao existem registros!",
+                                        "Clientes Pessoa Juridica:",
+                                        JOptionPane.ERROR_MESSAGE);
+                                } else {
+                                    JOptionPane.showMessageDialog(null,
+                                        mostraClientes,
+                                        "Clientes Pessoa Juridica:",
+                                        JOptionPane.DEFAULT_OPTION);
+                                }
+                            }
                         }
                     }
 
