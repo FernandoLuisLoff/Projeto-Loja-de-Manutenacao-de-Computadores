@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class ServicosRealizados extends VendaServicoRealizadas{
-    Integer qtdServicos=0;
 
     Controller control = new Controller();
 
@@ -18,12 +17,12 @@ public class ServicosRealizados extends VendaServicoRealizadas{
         servicos.add(servico);
     }
 
-    public Integer getQtdServicos (){
-        return qtdServicos;
+    public void removeServico (Integer index){
+        servicos.remove(index.intValue());
     }
 
-    public void setQtdServicos (Integer qtdServicos){
-        this.qtdServicos = qtdServicos;
+    public Integer getSizeArreyServicos(){
+        return servicos.size();
     }
 
     public void recibo (Integer index){
@@ -40,17 +39,31 @@ public class ServicosRealizados extends VendaServicoRealizadas{
 
         JOptionPane.showMessageDialog(null,
         "  Recibo do Servico: "+servicos.get(index).identificacao+"    Data do servico: "+servicos.get(index).dataVendaServico+"\n\n"+
-        "  Nome do Estabelecimento: "+control.nomeEstab+"    CNPJ: "+control.cnpjEstab+"\n"+
+        "  Nome do Estabelecimento: "+control.nomeEstab+"\n"+
+        "  CNPJ: "+control.cnpjEstab+"\n"+
         "  Endereco: "+control.enderecoEstab+"\n"+
         "  Telefone: "+control.telefoneEstab+"    Email: "+control.emailEstab+"\n\n"+
         "  Tipo de cliente: "+servicos.get(index).tipoCliente+"\n"+
         "  Cliente: "+servicos.get(index).cliente+"  CPF/CNPJ: "+servicos.get(index).documento+"\n\n"+
         "  Servico: "+servicos.get(index).produtoServico+"\n"+
         "  Valor: R$ "+String.format("%.2f", servicos.get(index).valorTot)+"\n"+
-        "  Forma de pagamento: "+servicos.get(index).formaPgto+"    Parcelamento: "+parcelamento+"\n\n"+
+        "  Parcelamento: "+parcelamento+"\n"+
+        "  Forma de pagamento: "+servicos.get(index).formaPgto+"\n\n"+
         "  Observacao: "+servicos.get(index).obs+"\n"+
         "  Garantia: "+servicos.get(index).garantia+" meses\n",
         "Recibo",
         JOptionPane.DEFAULT_OPTION);
+    }
+
+    public String []arreyIdentificadoresServicos (){
+        String []identificadores = new String[servicos.size()];
+        int i=0;
+
+        for (ServicosRealizados servico : servicos){
+            identificadores[i] = servico.identificacao;
+            i++;
+        }
+
+        return identificadores;
     }
 }

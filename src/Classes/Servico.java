@@ -3,7 +3,6 @@ package Classes;
 import java.util.ArrayList;
 
 public class Servico {
-    Integer qtdServicos=0;
 
     String nome;
     Double valor;
@@ -41,16 +40,16 @@ public class Servico {
         this.garantia = garantia;
     }
 
-    public Integer getQtdServicos (){
-        return qtdServicos;
-    }
-
-    public void setQtdServicos (Integer qtdServicos){
-        this.qtdServicos = qtdServicos;
+    public Integer getSizeArreyServicos(){
+        return servicos.size();
     }
 
     public void addServico (Servico servico){
         servicos.add(servico);
+    }
+
+    public void removeServico (Integer index){
+        servicos.remove(index.intValue());
     }
 
     public String readServicos (){
@@ -72,7 +71,6 @@ public class Servico {
         
         for (int i=0; i<nome.length; i++){
             addServico(new Servico(nome[i], valor[i], garantia[i]));
-            setQtdServicos(getQtdServicos()+1);
         }
     }
 

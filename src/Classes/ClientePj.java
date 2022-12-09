@@ -3,7 +3,6 @@ package Classes;
 import java.util.ArrayList;
 
 public class ClientePj extends Cliente {
-    Integer qtdCllientesPj=0;
 
     String cnpj;
 
@@ -14,24 +13,24 @@ public class ClientePj extends Cliente {
         this.cnpj = cnpj;
     }
 
-    public String getCnpj() {
+    public String getCnpj(){
         return cnpj;
     }
 
-    public void setCnpj(String cnpj) {
+    public void setCnpj(String cnpj){
         this.cnpj = cnpj;
     }
 
-    public Integer getQtdCllientesPj() {
-        return qtdCllientesPj;
-    }
-
-    public void setQtdCllientesPj(Integer qtdCllientesPj) {
-        this.qtdCllientesPj = qtdCllientesPj;
+    public Integer getSizeArreyClientesPj(){
+        return clientes.size();
     }
 
     public void addClientePj (ClientePj clientePf){
         clientes.add(clientePf);
+    }
+
+    public void removeClientePj (Integer index){
+        clientes.remove(index.intValue());
     }
 
     public String readClientes (){
@@ -52,7 +51,6 @@ public class ClientePj extends Cliente {
 
         for (int i=0; i<nome.length; i++){
             addClientePj(new ClientePj(nome[i], cnpj[i]));
-            setQtdCllientesPj(getQtdCllientesPj()+1);
         }
     }
 

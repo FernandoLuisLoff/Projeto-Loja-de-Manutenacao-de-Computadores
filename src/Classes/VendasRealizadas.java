@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class VendasRealizadas extends VendaServicoRealizadas{
-    Integer qtdVendas=0;
 
     Integer quant;
     Double valorUnit;
@@ -35,16 +34,16 @@ public class VendasRealizadas extends VendaServicoRealizadas{
         this.valorUnit = valorUnit;
     }
 
-    public Integer getQtdVendas (){
-        return qtdVendas;
-    }
-
-    public void setQtdVendas (Integer qtdVendas){
-        this.qtdVendas = qtdVendas;
+    public Integer getSizeArreyVendas(){
+        return vendas.size();
     }
 
     public void addVenda (VendasRealizadas venda){
         vendas.add(venda);
+    }
+
+    public void removeVenda (Integer index){
+        vendas.remove(index.intValue());
     }
 
     public void recibo (Integer index){
@@ -61,17 +60,33 @@ public class VendasRealizadas extends VendaServicoRealizadas{
 
         JOptionPane.showMessageDialog(null,
         "  Recibo da Venda: "+vendas.get(index).identificacao+"    Data da venda: "+vendas.get(index).dataVendaServico+"\n\n"+
-        "  Nome do Estabelecimento: "+control.nomeEstab+"    CNPJ: "+control.cnpjEstab+"\n"+
+        "  Nome do Estabelecimento: "+control.nomeEstab+"\n"+
+        "  CNPJ: "+control.cnpjEstab+"\n"+
         "  Endereco: "+control.enderecoEstab+"\n"+
         "  Telefone: "+control.telefoneEstab+"    Email: "+control.emailEstab+"\n\n"+
         "  Tipo de cliente: "+vendas.get(index).tipoCliente+"\n"+
         "  Cliente: "+vendas.get(index).cliente+"    CPF/CNPJ: "+vendas.get(index).documento+"\n\n"+
         "  Produto: "+vendas.get(index).produtoServico+"    Quantidade: "+vendas.get(index).quant+"\n"+
         "  Valor unitario: R$ "+String.format("%.2f", vendas.get(index).valorUnit)+"    Valor total: R$ "+String.format("%.2f", vendas.get(index).valorTot)+"\n"+
-        "  Forma de pagamento: "+vendas.get(index).formaPgto+"    Parcelamento: "+parcelamento+"\n\n"+
+        "  Parcelamento: "+parcelamento+"\n"+
+        "  Forma de pagamento: "+vendas.get(index).formaPgto+"\n\n"+
         "  Observacao: "+vendas.get(index).obs+"\n"+
         "  Garantia: "+vendas.get(index).garantia+" meses\n",
         "Recibo",
         JOptionPane.DEFAULT_OPTION);
+    }
+
+    public String []arreyIdentificadoresVendas (){
+        String []identificadores = new String[vendas.size()];
+        int i=0;
+
+        for (VendasRealizadas venda : vendas){
+            identificadores[i] = venda.identificacao;
+            i++;
+        }
+
+
+
+        return identificadores;
     }
 }
