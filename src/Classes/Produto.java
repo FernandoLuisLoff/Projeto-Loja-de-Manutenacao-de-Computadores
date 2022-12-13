@@ -2,42 +2,12 @@ package Classes;
 
 import java.util.ArrayList;
 
-public class Produto {
-
-    String nome;
-    Double valor;
-    Integer garantia;
+public class Produto extends ProdutosServicos{
 
     ArrayList<Produto> produtos = new ArrayList<>();
 
     public Produto (String nome, Double valor, Integer garantia){
-        this.nome = nome;
-        this.valor = valor;
-        this.garantia= garantia;
-    }
-
-    public String getNome (){
-        return nome;
-    }
-
-    public void setNome (String nome){
-        this.nome = nome;
-    }
-
-    public Double getValor (){
-        return valor;
-    }
-
-    public void setValor (Double valor){
-        this.valor = valor;
-    }
-
-    public Integer getGarantia (){
-        return garantia;
-    }
-
-    public void setGarantia (Integer garantia){
-        this.garantia = garantia;
+        super(nome, valor, garantia);
     }
 
     public Integer getSizeArreyProdutos (){
@@ -52,13 +22,19 @@ public class Produto {
         produtos.remove(index.intValue());
     }
 
-    public String readProdutos (){
+    public String mostrarProdutos (String nome, String valor, String garantia){
         String mostraProdutos="";
         int i=1;
 
-        for (Produto produto : produtos) {
-            mostraProdutos += "Produto "+i+":\n  Nome: "+produto.nome+"\n  Valor: R$ "+String.format("%.2f", produto.valor)+"\n  Garantia: "+produto.garantia+" meses\n\n"; 
-            i++; 
+        for (Produto produto : produtos){
+            if (produto.nome.contains(nome)){
+                if (produto.valor.toString().contains(valor) || valor.equals("-1")){
+                    if (produto.garantia.toString().equals(garantia) || garantia.equals("-1")){
+                        mostraProdutos += "Produto "+i+":\n  Nome: "+produto.nome+"\n  Valor: R$ "+String.format("%.2f", produto.valor)+"\n  Garantia: "+produto.garantia+" meses\n\n"; 
+                    }
+                }
+            }
+            i++;
         }
 
         return mostraProdutos;

@@ -41,9 +41,9 @@ public class ClientePf extends Cliente {
             if (cliente.nome.contains(nome)){
                 if (cliente.cpf.contains(cpf)){
                     mostraClientes += "Cliente "+i+":\n  Nome: "+cliente.nome+"\n  Cpf: "+cliente.cpf+"\n\n"; 
-                    i++; 
                 }
             }
+            i++; 
         }
 
         return mostraClientes;

@@ -41,9 +41,9 @@ public class ClientePj extends Cliente {
             if (cliente.nome.contains(nome)){
                 if (cliente.cnpj.contains(cnpj)){
                     mostraClientes += "Cliente "+i+":\n  Nome: "+cliente.nome+"\n  Cnpj: "+cliente.cnpj+"\n\n"; 
-                    i++; 
                 }
             }
+            i++;
         }
 
         return mostraClientes;
