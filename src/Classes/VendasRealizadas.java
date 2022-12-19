@@ -84,9 +84,7 @@ public class VendasRealizadas extends VendaServicoRealizadas{
             identificadores[i] = venda.identificacao;
             i++;
         }
-
-
-
+        
         return identificadores;
     }
 }

@@ -30,7 +30,7 @@ public class ClientePf extends Cliente {
     }
 
     public void removeClientePf (Integer index){
-        clientes.remove(index.intValue());
+        clientes.remove(index.intValue()); 
     }
 
     public String readClientes (String nome, String cpf){
